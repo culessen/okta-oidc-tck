@@ -32,8 +32,16 @@ class OktaSignInPage {
   }
 
   login(username, password) {
+    console.log('Filling username and password');
     this.usernameInput.sendKeys(username);
     this.passwordInput.sendKeys(password);
+    console.log('Filled username and password');
+
+    // console.log('Clicking submit button...');
+    // return this.submitButton.click();
+  }
+
+  clickSignInButton() {
     return this.submitButton.click();
   }
 

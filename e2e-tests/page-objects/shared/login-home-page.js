@@ -22,11 +22,16 @@ class LoginHomePage {
     // For asp.net webforms you can't have ids with hyphens
     // https://stackoverflow.com/questions/25919471/how-to-get-html-control-by-id-that-has-hyphens
   	if (__dirname.indexOf('samples-aspnet-webforms') > -1) {
+      console.log('Changing login button selector...');
       this.$loginButton = $('#loginButton');
     }
   }
 
   waitForPageLoad() {
+    browser.sleep(1000);
+    browser.getPageSource().then(function (res) {
+      console.log('AFTER CLICKING LOGOUT -' + res);
+    });
     return util.wait(this.$loginButton);
   }
 

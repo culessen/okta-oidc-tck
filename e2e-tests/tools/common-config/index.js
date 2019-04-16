@@ -74,9 +74,15 @@ commonConfig.configure = function (promises) {
     config.capabilities.screenResolution = '1600x1200';
     config.capabilities.extendedDebugging = true;
   }
+  // otherwise just launch the browser locally
+  else if (process.env.CHROME) {
+    console.log('-- Using Chrome --');
+    config.capabilities.browserName = 'chrome'
+  }
   // Run Chrome Headless
   else if (process.env.CHROME_HEADLESS || process.env.TRAVIS) {
     console.log('-- Using Chrome Headless --');
+    config.capabilities.browserName = 'chrome',
     config.capabilities.chromeOptions = {
       args: ['--headless','--disable-gpu','--window-size=1600x1200']
     };
@@ -89,6 +95,7 @@ commonConfig.configure = function (promises) {
   // otherwise just launch the browser locally
   else {
     console.log('-- Using Chrome --');
+    config.capabilities.browserName = 'chrome'
   }
   return config;
 };

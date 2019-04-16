@@ -33,17 +33,33 @@ describe('Okta Hosted Login Flow', () => {
 
   it('can login with Okta as the IDP', async () => {
     browser.get(appRoot);
+    console.log(`Loading home page ${appRoot}...`);
     loginHomePage.waitForPageLoad();
+    console.log(`Loaded home page ${appRoot}...`);
 
+    console.log('Clicking login button...');
     loginHomePage.clickLoginButton();
+    console.log('Clicked login button...');
     oktaSignInPage.waitForPageLoad();
+    console.log('Loaded login page...');
 
     // Verify that current domain has changed to okta-hosted login page
     const urlProperties = url.parse(process.env.ISSUER);
+    console.log(urlProperties.host);
+
     expect(browser.getCurrentUrl()).toContain(urlProperties.host);
     expect(browser.getCurrentUrl()).not.toContain(appRoot);
 
-    await oktaSignInPage.login(browser.params.login.username, browser.params.login.password);
+    console.log('Validated the current url...');
+
+    console.log(browser.params.login.username);
+    console.log(browser.params.login.password);
+    //await oktaSignInPage.login(browser.params.login.username, browser.params.login.password);
+    oktaSignInPage.login(browser.params.login.username, browser.params.login.password);
+    console.log('Clicking sign in button...');
+    oktaSignInPage.clickSignInButton();
+    console.log('Clicked sign in button...');
+    console.log('waiting for authenticated page...')
     authenticatedHomePage.waitForPageLoad();
   });
 
@@ -65,8 +81,11 @@ describe('Okta Hosted Login Flow', () => {
 
   it('can log the user out', async () => {
     browser.get(appRoot);
+    console.log('Waiting for home page...');
     authenticatedHomePage.waitForPageLoad();
+    console.log('Loaded authenticated home page...');
     authenticatedHomePage.logout();
+    console.log('After logout click...');
     loginHomePage.waitForPageLoad();
   });
 });

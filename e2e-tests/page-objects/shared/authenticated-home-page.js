@@ -23,6 +23,7 @@ class AuthenticatedHomePage {
     // For asp.net webforms you can't have ids with hyphens
     // https://stackoverflow.com/questions/25919471/how-to-get-html-control-by-id-that-has-hyphens
   	if (__dirname.indexOf('samples-aspnet-webforms') > -1) {
+      console.log('Changing the buttons...');
       this.$profileButton = $('#profileButton');
       this.$logoutButton = $('#logoutButton');
     }
@@ -31,6 +32,10 @@ class AuthenticatedHomePage {
   }
 
   waitForPageLoad() {
+    console.log('Waiting for logout button...');
+    // browser.getPageSource().then(function (res) {
+    //   console.log('AFTER CLICKING LOGINS -' + res);
+    // });
     return util.wait(this.$logoutButton);
   }
 
