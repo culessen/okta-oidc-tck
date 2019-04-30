@@ -29,9 +29,9 @@ class LoginHomePage {
 
   waitForPageLoad() {
     browser.sleep(1000);
-    browser.getPageSource().then(function (res) {
-      console.log('AFTER CLICKING LOGOUT -' + res);
-    });
+    // browser.getPageSource().then(function (res) {
+    //   console.log('AFTER CLICKING LOGOUT -' + res);
+    // });
     return util.wait(this.$loginButton);
   }
 
